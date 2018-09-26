@@ -1,0 +1,63 @@
+{
+ "Weather": {
+            "api": "http://api.openweathermap.org/data/2.5/weather?q=CITY,COUNTRY&APPID=ENTER_API_KEY_HERE"
+ },
+ "Firebase": {
+             "user": "",
+             "password": "",
+             "apiKey": "",
+             "authDomain": "",
+             "databaseURL": "",
+             "storageBucket": ""
+ },
+ "Weather_simulation": {
+            "active": true,
+            "LIRC_file": "lircd.conf",
+            "Power": "KEY_POWER",
+            "Moon_darkest": "KEY_1",
+            "Moon_dark": "KEY_2",
+            "Moon_light": "KEY_3",
+            "Sunrise_set": "KEY_4",
+            "Rain": "KEY_F10",
+            "Thunderstorm": "KEY_F9",
+            "Drizzle": "Key_F11",
+            "Clear": "Key_0",
+            "few clouds": "KEY_8",
+            "scattered clouds": "KEY_7",
+            "broken clouds": "KEY_6",
+            "overcast clouds": "KEY_5",
+            "default_clouds": "KEY_8",
+            "default": "KEY_F12"
+ },
+ "Tank_Info":{
+            "regression_inputs": {
+                "x": [0,3,4,5,6.5,7,8,9,10,11,12,0,1,2.5,3,4,6,7,8,9,10,11,12],
+                "y": [1.0,0.971621622,0.948787062,0.915775401,0.869318182,0.843537415,0.805107527,0.751978892,0.692307692,0.608870968,0.541490858,1.013661202,
+                1.016460905,0.986282579,0.971193416,0.94109589,0.879286694,0.845205479,0.802469136,0.747599451,0.696844993,0.617283951,0.541838134]
+            },
+            "rectangular_tank":{
+                "length": 30,
+                "width": 12.25,
+                "height_until_full": 22
+            },
+            "square_tank": "not supported yet"
+ },
+ "ADC_presets":{
+           "active": true,
+           "light_sensor": 7,
+           "water_level_sensor":{
+                "active": true,
+                "adc_pin": 1
+           },
+           "reference_signal": 0,
+           "leak sensors":{
+                "sensor_1": 2,
+                "sensor_2": 3
+           }
+ },
+ "Temp_sensors":{
+           "active": true,
+           "tank_bus": "28-000008e42a54",
+           "ambient_bus": "28-000008e5c5cd"
+ }
+}
