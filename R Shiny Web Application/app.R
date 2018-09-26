@@ -66,9 +66,9 @@ options(shiny.trace = TRUE)
       }
 
 
-##########################
-# Web Development Layout #
-##########################
+###########################
+## User Interface Layout ##
+###########################
 
   sidebar <- dashboardSidebar(
     sidebarMenu(
@@ -162,8 +162,12 @@ ui <- dashboardPage(
   dashboardHeader(title = "Fish Tank Monitor"),
   sidebar,
   body
-)      
-
+) 
+        
+#################################
+### Server Side Functionality ###
+#################################
+        
 server <- function(input, output) {
   
   ################
