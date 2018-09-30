@@ -84,7 +84,7 @@ def ambient_temp():
 #############################################################
 
 # Define variables as lists of zeros, we will log 10 measurements
-# If you don't have an ADC
+# If you don't have an ADC, set corresponding active values to False in the master_data.json file
 number_of_measurments=10
 light_reads=[0]*number_of_measurments
 waterlevel_reads=[0]*number_of_measurments
@@ -115,7 +115,7 @@ elif(credentials['ADC_presets']['active']!=False and credentials['Temp_sensors']
         leaksens2_reads[i] = mcp.read_adc(credentials['ADC_presets']['leak sensors']['sensor_2'])/1023
         time.sleep(.1)
 elif(credentials['ADC_presets']['active']!=True and credentials['Temp_sensors']['active']!=False):
-    # Loop through 20 measurments and save in a list
+    # If you only have temperature sensors and no ADC
     for i in range(0,number_of_measurments):
         waterlevel_reads[i] = mcp.read_adc(credentials['ADC_presets']['water_level_sensor']['adc_pin'])
         ref_sig[i] = mcp.read_adc(credentials['ADC_presets']['reference_signal'])
@@ -195,7 +195,7 @@ if(credentials['Weather_simulation']['active']!=False):
 
 
 ## Data to save
-# This area should run okay if you are missing some combination of project, it should still push data to you Firebase database
+# This area should run okay if you are missing some combination of project sensors, it should still push data to your Firebase database
 if(credentials['ADC_presets']['active']!=False and credentials['Temp_sensors']['active']!=False and credentials['ADC_presets']['water_level_sensor']['active']!=False):
     # You have all sensors
     data_out = {'Values':{"Time":datetime.now().strftime('%Y-%m-%d %H:%M:%S'), "Tank Temp":np.mean(tank_temp_reads), "Ambient Temp": np.mean(ambient_temp_reads), "Light": np.mean(light_reads), "Water": water_level_data, "Leak1":np.mean(leaksens1_reads), "Leak2": np.mean(leaksens2_reads)}, "Conditions": conditions}
