@@ -12,8 +12,7 @@ credentials_in=open(os.getcwd() +'/Rpi4Fish/master_data.json')
 credentials=json.load(credentials_in)
 last_data_log_in=open(os.getcwd() +'/Rpi4Fish/Data_from_sensors.json')
 last_data_log=json.load(last_data_log_in)
-#tank_dimensions_in=open(os.getcwd() +'/Rpi4Fish/tank_sensor_required.json')
-#tank_dimensions=json.load(tank_dimensions_in)
+
 
 ############################
 ### Define Pin Locations ###
