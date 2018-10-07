@@ -51,7 +51,7 @@ We will use crontab to schedule our executable scripts to run. At the command li
 
 ```$ crontab -e ```
 
-Once in the crontab scheduler paste the following under the header line ```# m h  dom mon dow   command```
+Once in the crontab scheduler paste the following under the header line ```# m h  dom mon dow   command```:
 
 ```
 57 6 * * * /home/pi/Rpi4Fish/light_on.py
@@ -76,30 +76,35 @@ active: if you will be using the IR system then active is ```true```, otherwise 
 
 LIRC_File: enter the name of your config file that contains the IR signals.
 
-Power to default: Enter the keys you would like executed from LIRC that you had programmed. These programmed keys will also be in your LIRC file.
+Power to default: Enter the keys you would like executed from LIRC that you had programmed. These programmed keys will also be in your LIRC file. If you do not have enough IR signals to emit that match the conditions, set input ```false``` instead of a key. When main.program.py runs it checks to make sure the condition key is not set to ```false```, if a key is set to ```false``` it while execute the default.
 
-default: If you are missing a weather and condition pair, this is your default IR signal to emit. For instance the condition mist, I don't have enough weather conidtion programmed to simulate, so the light defaults to a greenish purple color settings if it doen't have a matching condition
+default: This is your default IR signal to emit if you are missing a weather coniditon/IR signal pair. For instance, for the condition mist, I don't have enough weather conidtions programmed to simulate mist, so the light defaults to KEY_F12 which I programmed to be a greenish purple color settings.
 
 ### Tank_Info
-If you are not using a water level sensor you can ignore this section. The program should know based on information you enter in the ADC_presets section that you don't have a water level sensor.
+If you are not using a water level sensor you can ignore this section. The program should determine based on information you enter in the ADC_presets section that you do not have a water level sensor.
 
 regression_inputs: The values for x correspond to the amount of water that was covering the sensor when y value was produced from the sensor. The script calibrate_water_sensor.py has more information on how these numbers are produced along with the instructions.
 
-rectangular_tank: these are the dimensions of your fish tank. Currently it only will do math to calculate the volume of a rectangle. For 
-height_until_full, this should be the length in inches from the bottom of the tank to the top of the water level sensor. This helps the software determine what the volume should be full so it can figure out how much water is missing from the tank.
+rectangular_tank: these are the dimensions of your fish tank. Currently it only will do math to calculate the volume of a rectangular tank; sorry hexagon tank people. For height_until_full, this should be the length in inches from the bottom of the tank to the top of the water level sensor. This helps the software determine the full volume, so it can figure out how much water is missing from the tank.
 
 ### ADC_presets
 If you have an ADC and don't have a subcomponent, then just enter a random pin. They still produce noise or a value so it shouldn't interfere with the R GUI.
 
-active: if ```true``` then you have an ADC, otherwise set to ```false```
-light_sensor: enter the pin that the light sensor is connected to
+active: if ```true``` then you have an ADC, otherwise set to ```false```.
+
+light_sensor: enter the pin the light sensor is connected to.
+
 water_level_sensor: if you have one then active: is ```true``` else set to ```false```. adc_pin: enter the ADC pin for the water sensor.
+
 reference_signal: enter the pin that is the reference signal for the water_level_sensor.
-leak_sensors: enter the pins for the leak sensors
+
+leak_sensors: enter the pins for the leak sensors.
 
 ### Temp_sensors
-active: if you have temperature sensors then set as ```true``` else set as ```false```
-tank_bus: the bus value produced for the tank sensor. You get this value from following the temperature sensor instructions under hardware
+active: if you have temperature sensors then set as ```true```, otherwise  set as ```false```.
+
+tank_bus: the bus value produced for the tank sensor. You get this value from following the temperature sensor instructions under hardware.
+
 ambient_bus: the bus value produced for the ambient sensor. You get this value from following the temperature sensor instructions under hardware.
 
 
