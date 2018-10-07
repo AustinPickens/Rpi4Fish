@@ -10,19 +10,19 @@ I rewrote all the source code in such a way where someone with no experience cou
 I will update this section with my own instructions eventually, but most of the project was adapted from the sources below. I would HIGHLY SUGGEST getting each component set up, running, and understanding what is going on between the components and code. THEN integrate them all together with my program. Otherwise you will probably get lost and your head will hurt. You can view my current hardware configuration in the Images folder.
 
 ### Raspberry Pi Set up
-You will need to buy a Raspberry Pi Zero,Here is a good backgroun guide on getting started with what you need (http://dailylinuxuser.com/2016/02/how-to-set-up-raspberry-pi-zero.html).  I would suggest and reccomend:
-1) get the Raspberry Pi Zero with headers unless you know how to solder electronics. 
-2) getting a 5V 3amp power cord 
-3) set up the system to run as headless so you don't need the keyboard, mouse, and HDMI cables. I have a blurb on how to do this below  under "Setting up the Operating System (OS) and SSH".
+You will need to buy a Raspberry Pi Zero,Here is a good background guide on getting started with what you need (http://dailylinuxuser.com/2016/02/how-to-set-up-raspberry-pi-zero.html).  I would suggest and reccomend:
+1) Get the Raspberry Pi Zero with headers unless you know how to solder electronics. 
+2) Getting a 5V 3 amp power cord.
+3) Set up the system to run as headless so you don't need the keyboard, mouse, and HDMI cables. I have a blurb on how to do this below  under "Setting up the Operating System (OS) and SSH".
 
 ### Weather Simulation using the LIRC software
 I followed this guide on setting up LIRC and programming the my fish tank light remote IR signals (https://www.piddlerintheroot.com/ir-blaster-lirc/). Make sure to test the components and see your light change. You'll copy your conf file to the Rpi4Fish directory.
 
 ### Temperature sensors
-I have two DS18B20 temperature sensors running on my system, one for ambient and one for in the tank. If you have two sensors you can see the variation I put in the main.program.py which is based off here (https://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/overview_.
+I have two DS18B20 temperature sensors running on my system, one for ambient and one for in the tank. If you have two sensors you can see the variation I put in the main.program.py which is based off (https://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/overview_.
 
 ### ADC and Water sensors
-I bought the MCP3008 ADC originally for the water level sensor then I configured the light sensor and leak sensors. For the water level sensor, I am using the 12" Chemical eTape Liquid Level Sensor with Teflon Jacket (https://www.adafruit.com/product/1786). I adapated the code from here and set the project up (https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008). It worked, but I read another blog that suggested normalizing the sensor reads to the a reference signal that corresponded to a saturated resistance of the sensor (https://www.hackster.io/porrey/etape-f4b457). Normalizing to their suggested reference signal greatly increased the accuracy of the determined signal, however, as they mentioned the calibration curve was not linear. This was why I use a second order polynomial curve as the calibration curve. If you go into the Images folder you can see the difference between linear and polynomial raw and normalized calibration curves, and using the normalized polynomial curve produced the best r^2 and performed best in validating the predicted water level accuracy.
+I bought the MCP3008 ADC originally for the water level sensor then I configured the light sensor and leak sensors. For the water level sensor, I am using the 12" Chemical eTape Liquid Level Sensor with Teflon Jacket (https://www.adafruit.com/product/1786). I adapated the code from here and set the project up (https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008). It worked, but I read another blog that suggested normalizing the sensor reads to the a reference signal that corresponded to a saturated resistance of the sensor (https://www.hackster.io/porrey/etape-f4b457). Normalizing a reference signal greatly increased the accuracy of the determined signal, however, as they mentioned the calibration curve was not linear. This was why I use a second order polynomial curve as the calibration curve. If you go into the Images folder you can see the difference between linear and polynomial raw and normalized calibration curves, and using the normalized polynomial curve produced the best r^2 and performed best in validating the predicted water level accuracy.
 
 ## Configuring the Raspberry Pi
 
@@ -79,7 +79,7 @@ Once in the crontab scheduler paste the following under the header line ```# m h
 This will run the light_on.py script at 6:57 am, then launch the main.program.py every 10 minutes followed by data_2_cloud.py every 15 minutes. This staggered schedule prevents python from getting hung up since the Raspberry Pi Zero has a single core single thread processor. In earlier versions I wrote, there were issues with scripts not finishing before the next script lanuched, and this time spacing ensures there is adequate time to log all sensor data before trying to push it to the cloud. At 5:00pm the light_off.py script will launch to shut the light off.
 
 ## Files to modify
-The file master_data.json should be the only file needed to modify. In this file you will add the weather API information, your Firebase credentials, and state which components are active and ciritcal information for the program to run each component.
+The file ```master_data.json``` should be the only file needed to modify. In this file you will add the weather API information, your Firebase credentials, and state which components are active and ciritcal information for the program to run each component.
 
 ### Weather
 Enter the city and country where it says CITY,COUNTRY. Enter API key where it says ENTER_API_KEY_HERE. The weather API information is key for the weather simulation section of main.program.py to function, along with the GUI.
