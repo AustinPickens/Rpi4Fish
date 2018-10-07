@@ -7,8 +7,24 @@ Rpi4Fish is an open source project developed to control and monitor your fish ta
 I rewrote all the source code in such a way where someone with no experience could walk through and understand what is happening. 
 
 ## Hardware Instructions
+I will update this section with my own instructions eventually, but most of the project was adapted from the sources below. I would HIGHLY SUGGEST getting each component set up, running, and understanding what is going on between the components and code. THEN integrate them all together with my program. Otherwise you will probably get lost and your head will hurt. You can view my current hardware configuration in the Images folder.
 
-## Setting the Raspberry Pi
+### Raspberry Pi Set up
+You will need to buy a Raspberry Pi Zero,Here is a good backgroun guide on getting started with what you need (http://dailylinuxuser.com/2016/02/how-to-set-up-raspberry-pi-zero.html).  I would suggest and reccomend:
+1) get the Raspberry Pi Zero with headers unless you know how to solder electronics. 
+2) getting a 5V 3amp power cord 
+3) set up the system to run as headless so you don't need the keyboard, mouse, and HDMI cables. I have a blurb on how to do this below  under "Setting up the Operating System (OS) and SSH".
+
+### Weather Simulation using the LIRC software
+I followed this guide on setting up LIRC and programming the my fish tank light remote IR signals (https://www.piddlerintheroot.com/ir-blaster-lirc/). Make sure to test the components and see your light change. You'll copy your conf file to the Rpi4Fish directory.
+
+### Temperature sensors
+I have two DS18B20 temperature sensors running on my system, one for ambient and one for in the tank. If you have two sensors you can see the variation I put in the main.program.py which is based off here (https://learn.adafruit.com/adafruits-raspberry-pi-lesson-11-ds18b20-temperature-sensing/overview_.
+
+### ADC and Water sensors
+I bought the MCP3008 ADC originally for the water level sensor then I configured the light sensor and leak sensors. For the water level sensor, I am using the 12" Chemical eTape Liquid Level Sensor with Teflon Jacket (https://www.adafruit.com/product/1786). I adapated the code from here and set the project up (https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008). It worked, but I read another blog that suggested normalizing the sensor reads to the a reference signal that corresponded to a saturated resistance of the sensor (https://www.hackster.io/porrey/etape-f4b457). Normalizing to their suggested reference signal greatly increased the accuracy of the determined signal, however, as they mentioned the calibration curve was not linear. This was why I use a second order polynomial curve as the calibration curve. If you go into the Images folder you can see the difference between linear and polynomial raw and normalized calibration curves, and using the normalized polynomial curve produced the best r^2 and performed best in validating the predicted water level accuracy.
+
+## Configuring the Raspberry Pi
 
 ### Setting up the Operating System (OS) and SSH
 If you are using the Raspberry Pi Zero, you'll need to configure it so it can connect to your internet and you can ssh into it. SSH is a secure way to connect to another computer. If you're on a mac or linux you will ssh using terminal, if you're on windows then you'll have to download (https://putty.org/). Follow online instructions for load the Raspberian operating system onto the sd card for the Raspberry Pi (https://howtoraspberrypi.com/how-to-raspberry-pi-headless-setup/). 
