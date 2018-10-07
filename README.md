@@ -8,6 +8,20 @@ I rewrote all the source code in such a way where someone with no experience cou
 
 ## Hardware Instructions
 
-
+## Setting up the scripts
+Before running the scripts we wil
 
 ## Files to modify
+The file master_data.json should be the only file needed to modify.
+
+### Weather
+enter the city and country where it says CITY,COUNTRY. Enter API key where it says ENTER_API_KEY_HERE. The weather API information is key for the Weather simulation section to function, along with the GUI
+
+### Firebase
+Enter Google Firebase credentials here. There should be sufficient documentation available on the web to find this information on the site.
+
+### Weather Simulation
+active: if you will be using the IR system then active is true, otherwise set it to false. If set to false you can ignorethe rest of the Weather_simulation fields.
+LIRC_File: enter the name of your config file that contains the IR signals
+Power to default: Enter the you would like executed from LIRC that you had programmed. These programmed keys will also be in your LIRC file.
+default: If you are missing weather condition keys, this is your default IR signal to emit. For instance the condition mist, I don't have enough weather conidtion programmed to simulate, so the light defaults to a greenish purple color settings if it doen't have a matching condition
