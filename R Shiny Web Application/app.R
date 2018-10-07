@@ -1,3 +1,6 @@
+## FYI you would not want to design a shiny app this way. It is written so you can run the R code first, 
+## then it pushes all the variables into the R Shiny section to build the GUI.
+
 ###########################################
 ### Fail safe install and load packages ###
 ###########################################
@@ -149,7 +152,7 @@ options(shiny.trace = TRUE)
      tabItem(
        tabName = 'overview',
        h2(strong('Project Overview')),
-       tags$img(src='workflow.png', width = 1000)
+       #tags$img(src='workflow.png', width = 1000) # uncomment this line if you want the image to load in
      )
     )
   )
