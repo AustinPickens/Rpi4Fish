@@ -6,8 +6,7 @@ import Adafruit_MCP3008
 import numpy as np
 from numpy.polynomial import Polynomial as P
 from numpy import matrix
-import Adafruit_GPIO.SPI as SPI
-import Adafruit_MCP3008
+
 # Software SPI configuration:
 CLK  = 18
 MISO = 23
