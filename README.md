@@ -72,11 +72,10 @@ Once in the crontab scheduler paste the following under the header line ```# m h
 ```
 57 6 * * * /home/pi/Rpi4Fish/light_on.py
 */10 * * * * /home/pi/Rpi4Fish/main.program.py
-*/15 * * * * /home/pi/Rpi4Fish/data_2_cloud.py
 0 17 * * * /home/pi/Rpi4Fish/light_off.py
 ```
 
-This will run the light_on.py script at 6:57 am, then launch the main.program.py every 10 minutes followed by data_2_cloud.py every 15 minutes. This staggered schedule prevents python from getting hung up since the Raspberry Pi Zero has a single core single thread processor. In earlier versions I wrote, there were issues with scripts not finishing before the next script lanuched, and this time spacing ensures there is adequate time to log all sensor data before trying to push it to the cloud. At 5:00pm the light_off.py script will launch to shut the light off.
+This will run the light_on.py script at 6:57 am, then launch the main.program.py and data_2_cloud.py every 10 minutes. Originally I staggered the schedule main.program.py and data_2_cloud.py, but python would often getting hung up since the Raspberry Pi Zero has a single core single thread processor. In earlier versions I wrote, there were issues with scripts not finishing before the next script lanuched, and having main.program.py launched data_2_cloud.py ensures there is adequate time to log all sensor data before trying to push it to the cloud. At 5:00pm the light_off.py script will launch to shut the light off.
 
 ## Files to modify
 The file ```master_data.json``` should be the only file needed to modify. In this file you will add the weather API information, your Firebase credentials, and state which components are active and ciritcal information for the program to run each component.
