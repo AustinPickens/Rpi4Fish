@@ -212,4 +212,7 @@ else:
 ## Open and save file
 with open('Data_from_sensors.json', 'w') as fp:
     json.dump(data_out, fp)
+    
+time.sleep(5)
 
+os.system('/home/pi/Rpi4Fish/data_2_cloud.py')
